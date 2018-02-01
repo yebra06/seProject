@@ -16,9 +16,9 @@
             <h2>Software Engineering Project</h2>
         </header>
         <nav>
-            <a href="#">home</a>
-            <a href="#">log in</a>
-            <a href="#">sign up</a>
+            <a href="{% url 'index' %}">home</a>
+            <a href="{% url 'login' %}">log in</a>
+            <a href="{% url 'signup' %}">sign up</a>
         </nav>
         {% block content %}{% endblock %}
         {% block scripts %}{% endblock %}

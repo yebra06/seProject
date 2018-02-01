@@ -1,4 +1,6 @@
 @import 'index.css';
+@import 'login.css';
+@import 'signup.css';
 
 html {
     -webkit-box-sizing: border-box;
