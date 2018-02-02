@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <div class="login">
         <h1>login</h1>
+        <form method="post" action="{% url 'login' %}">
+            <div class="form-inputs">
+                {% crispy form %}
+            </div>
+        </form>
     </div>
-{% endblock content %}
+{% endblock %}
