@@ -19,7 +19,29 @@ body {
     box-sizing: inherit;
 }
 
-.main-header {
-    text-align: center;
+a {
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    line-height: 50px;
+    align-items: stretch;
+    flex-wrap: wrap;
+    background-color: lavender;
+    text-transform: capitalize;
+}
+
+.nav-link {
+    font-size: 15px;
+    padding: 0 15px;
+    color: black;
+}
+
+.nav-link.left {
+    margin: 0 auto 0 15px;
+    padding: 0;
+}
