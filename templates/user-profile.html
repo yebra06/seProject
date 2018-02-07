@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="user-profile">
+        <h1>User Profile</h1>
+        <a href="{% url 'user-info'  %}">Edit Profile</a>
+    </div>
+{% endblock %}

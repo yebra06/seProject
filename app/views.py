@@ -40,12 +40,16 @@ def user_signup(request):
             user.save()
             account = authenticate(username=user.username, password=password)
             login(request, account)
-            return redirect('index')
+            return redirect('user-profile')
     return render(request, 'signup.html', {'form': form})
 
 
-def profile(request):
-    return render(request, 'profile.html')
+def user_profile(request):
+    return render(request, 'user-profile.html')
+
+
+def user_info(request):
+    return render(request, 'user-info.html')
 
 
 def user_logout(request):
