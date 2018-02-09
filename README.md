@@ -8,7 +8,7 @@ Django web app for CS 4398 Texas State University.
 - Alfredo Yebra Jr.
 
 ## Tools
-- Django Web Framework
+- Django Web Framework fsdfsd
 - PyCharm
 
 ## Run local server
