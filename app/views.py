@@ -2,7 +2,11 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
+
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
 from .forms import LoginForm, SignupForm
 
@@ -55,3 +59,17 @@ def user_info(request):
 def user_logout(request):
     logout(request)
     return redirect('index')
+
+
+def resume(request):
+    width, height = letter
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="resume.pdf"'
+
+    # Start drawing
+    pdf = canvas.Canvas(response, pagesize=letter)
+    pdf.setLineWidth(.3)
+    pdf.showPage()
+    pdf.save()
+
+    return response
