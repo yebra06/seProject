@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^user-profile/$', views.user_profile, name='user-profile'),
     url(r'^user-info/$', views.user_info, name='user-info'),
-    url(r'^user-resume/$', views.some_view, name='user-resume')
+    url(r'^user-resume/$', views.resume, name='user-resume')
 ]
