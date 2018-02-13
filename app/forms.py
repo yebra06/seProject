@@ -33,3 +33,24 @@ class SignupForm(LoginForm):
         if email_query.exists():
             raise forms.ValidationError('This email has already been registered')
         return email
+
+
+class UserForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_id = 'user-info-form'
+        self.helper.form_class = 'user-info-form'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'user-info'
+        self.helper.layout = Layout(
+            Field('first_name', placeholder=self.instance.first_name or 'first name'),
+            Field('last_name', placeholder=self.instance.last_name or 'last name'),
+            Field('email', placeholder=self.instance.email, required=False),
+            Submit('submit', 'Submit'))
+

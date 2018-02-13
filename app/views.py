@@ -2,13 +2,14 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 
-from .forms import LoginForm, SignupForm
+from .forms import LoginForm, SignupForm, UserForm
+from .models import User
 
 
 def index(request):
@@ -48,12 +49,20 @@ def user_signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
+@login_required
 def user_profile(request):
     return render(request, 'user-profile.html')
 
 
+@login_required
 def user_info(request):
-    return render(request, 'user-info.html')
+    form = UserForm(instance=request.user)
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=request.user)
+        if form.is_valid():
+            request.user = form.save()
+            return redirect('user-profile')
+    return render(request, 'user-info.html', {'form': form})
 
 
 def user_logout(request):
