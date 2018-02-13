@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # 3rd party packages
     'crispy_forms',
+    'easy_pdf',
 
     # Our apps
     'app'

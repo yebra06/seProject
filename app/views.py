@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.views.generic.detail import DetailView
 
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
+from easy_pdf.views import PDFTemplateResponseMixin
 
 from .forms import LoginForm, SignupForm, UserForm
 from .models import User
@@ -70,15 +70,6 @@ def user_logout(request):
     return redirect('index')
 
 
-def resume(request):
-    width, height = letter
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="resume.pdf"'
-
-    # Start drawing
-    pdf = canvas.Canvas(response, pagesize=letter)
-    pdf.setLineWidth(.3)
-    pdf.showPage()
-    pdf.save()
-
-    return response
+class UserResume(PDFTemplateResponseMixin, DetailView):
+    model = User
+    template_name = 'user-resume.html'
