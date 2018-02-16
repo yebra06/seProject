@@ -1,7 +1,7 @@
 from django import forms
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Field, Layout, Submit
+from crispy_forms.layout import Div, Field, HTML, Layout, Submit
 
 from .models import Profile
 
@@ -38,7 +38,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name', 'email', 'phone_number', 'city', 'state', 'zipcode')
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
@@ -51,4 +51,8 @@ class UserForm(forms.ModelForm):
             Field('first_name', placeholder=self.instance.first_name or 'first name'),
             Field('last_name', placeholder=self.instance.last_name or 'last name'),
             Field('email', placeholder=self.instance.email, required=False),
+            Field('phone_number', placeholder=self.instance.phone_number or 'phone'),
+            Field('city', placeholder=self.instance.city or 'city'),
+            Field('state', placeholder=self.instance.state or 'state'),
+            Field('zipcode', placeholder=self.instance.zipcode or 'zipcode'),
             Submit('submit', 'Submit'))
