@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'easy_pdf',
 
     # Our apps
-    'app'
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -120,7 +120,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = 'app.User'
+AUTH_USER_MODEL = 'accounts.Profile'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

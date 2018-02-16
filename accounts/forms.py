@@ -1,17 +1,16 @@
 from django import forms
-from django.conf import settings
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import ButtonHolder, Field, Layout, Submit
+from crispy_forms.layout import Field, Layout, Submit
 
-from .models import User
+from .models import Profile
 
 
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = User
+        model = Profile
         fields = ('email', 'password')
 
     def __init__(self, *args, **kwargs):
@@ -29,7 +28,7 @@ class SignupForm(LoginForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        email_query = User.objects.filter(email=email)
+        email_query = Profile.objects.filter(email=email)
         if email_query.exists():
             raise forms.ValidationError('This email has already been registered')
         return email
@@ -38,7 +37,7 @@ class SignupForm(LoginForm):
 class UserForm(forms.ModelForm):
 
     class Meta:
-        model = User
+        model = Profile
         fields = ('first_name', 'last_name', 'email')
 
     def __init__(self, *args, **kwargs):
@@ -53,4 +52,3 @@ class UserForm(forms.ModelForm):
             Field('last_name', placeholder=self.instance.last_name or 'last name'),
             Field('email', placeholder=self.instance.email, required=False),
             Submit('submit', 'Submit'))
-

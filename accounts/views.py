@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -9,7 +10,7 @@ from django.views.generic.detail import DetailView
 from easy_pdf.views import PDFTemplateResponseMixin
 
 from .forms import LoginForm, SignupForm, UserForm
-from .models import User
+from .models import Profile
 
 
 def index(request):
@@ -71,5 +72,5 @@ def user_logout(request):
 
 
 class UserResume(PDFTemplateResponseMixin, DetailView):
-    model = User
+    model = Profile
     template_name = 'user-resume.html'
