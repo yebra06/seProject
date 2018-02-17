@@ -14,20 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from accounts import views
+from accounts.views import index
 
 
 urlpatterns = [
+    url(r'^$', index, name='index'),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),
-    url(r'^signup/$', views.user_signup, name='signup'),
-    url(r'^login/$', views.user_login, name='login'),
-    url(r'^logout/$', views.user_logout, name='logout'),
-    url(r'^user-profile/$', views.user_profile, name='user-profile'),
-    url(r'^user-info/$', views.user_info, name='user-info'),
-    url(r'^user-resume/(?P<pk>\d+)$', views.UserResume.as_view(), name='user-resume')
+    url(r'^accounts/', include('accounts.urls')),
+    url(r'^resume/', include('resumes.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'easy_pdf',
 
     # Our apps
-    'accounts'
+    'accounts',
+    'resumes',
 ]
 
 MIDDLEWARE = [

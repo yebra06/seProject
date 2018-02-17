@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -31,7 +30,7 @@ def user_login(request):
                     return redirect('index')
             else:
                 form.add_error(None, 'Your email or password is incorrect.')
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'user-login.html', {'form': form})
 
 
 def user_signup(request):
@@ -47,7 +46,7 @@ def user_signup(request):
             account = authenticate(username=user.username, password=password)
             login(request, account)
             return redirect('user-profile')
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'user-signup.html', {'form': form})
 
 
 @login_required
