@@ -51,7 +51,7 @@ def user_signup(request):
 
 @login_required
 def user_profile(request):
-    return render(request, 'user-profile.html')
+    return render(request, 'user-profile.html', {'fullname': request.user.get_full_name() or 'User Profile'})
 
 
 @login_required

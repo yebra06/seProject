@@ -2,9 +2,36 @@
 {% load staticfiles %}
 
 {% block content %}
+	<style>
+		.user-profile {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		.user-profile-section {
+			display: flex;
+			justify-content: center;
+		}
+		.user-profile-btn {
+			display: flex;
+			align-items: stretch;
+			background-color: transparent;
+			border: 3px solid lavender;
+			line-height: 1;
+			margin: 0.5em;
+			padding: 1em 2em;
+		}
+		.user-profile-btn:hover {
+			box-shadow: inset 0 0 0 2em lavender;
+		}
+	</style>
     <div class="user-profile">
-        <h1>User Profile</h1>
-        <a href="{% url 'user-info'  %}">Edit Profile</a>
-        <a href="{% url 'user-resume' pk=request.user.id %}">Resume</a>
+        <div class="user-profile-section">
+	        <h1 style="color: lightcoral">{{ fullname }}</h1>
+        </div>
+	    <div class="user-profile-section">
+		    <a class="user-profile-btn" href="{% url 'user-info'  %}">Edit Profile</a>
+		    <a class="user-profile-btn" href="{% url 'user-resume' pk=request.user.id %}">Resume</a>
+	    </div>
     </div>
 {% endblock %}
