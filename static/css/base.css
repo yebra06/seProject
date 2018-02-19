@@ -23,6 +23,7 @@ a {
     overflow: hidden;
 }
 
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: flex-end;
@@ -44,6 +45,7 @@ a {
     padding: 0;
 }
 
+/* User Profile */
 .user-profile {
     display: flex;
     flex-direction: column;
@@ -53,6 +55,10 @@ a {
 .user-profile-section {
     display: flex;
     justify-content: center;
+}
+
+.user-profile-header {
+    color: rgb(5, 191, 250);
 }
 
 .user-profile-btn {
@@ -67,4 +73,20 @@ a {
 
 .user-profile-btn:hover {
     box-shadow: inset 0 0 0 2em lavender;
+}
+
+/* LOGIN */
+.login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login-section {
+    display: flex;
+    justify-content: center;
+}
+
+.login-header {
+    color: rgb(5, 191, 250);
 }

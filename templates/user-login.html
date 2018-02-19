@@ -3,17 +3,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-	<style>
-	.login {
-		display: flex;
-		justify-content: center;
-	}
-	.login-section {
-		display: flex;
-	}
-	</style>
     <div class="login">
-        <h1 class="login-section">login</h1>
+        <div class="login-section">
+	        <h1 class="login-header">Login</h1>
+        </div>
         <form class="login-section" method="post" action="{% url 'login' %}">
             <div class="form-inputs">
                 {% crispy form %}
