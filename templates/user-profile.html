@@ -8,6 +8,7 @@
         </div>
 	    <div class="user-profile-section">
 		    <a class="user-profile-btn" href="{% url 'user-info'  %}">Edit Profile</a>
+		    <a class="user-profile-btn" href="{% url 'resume-builder'  %}">Create a Resume</a>
 		    <a class="user-profile-btn" href="{% url 'user-resume' pk=request.user.id %}">Resume</a>
 	    </div>
     </div>

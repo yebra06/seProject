@@ -3,6 +3,13 @@
 
 {% block content %}
     <div class="resume-builder">
-
+	    <form method="post" action="{% url 'resume-builder' %}">
+		    {% for form in education_form %}
+			    {{ form }}
+		    {% endfor %}
+		    {% for form in experience_form %}
+			    {{ form }}
+		    {% endfor %}
+	    </form>
     </div>
 {% endblock content %}
