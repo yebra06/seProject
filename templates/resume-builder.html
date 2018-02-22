@@ -4,6 +4,7 @@
 {% block content %}
     <div class="resume-builder">
 	    <form method="post" action="{% url 'resume-builder' %}">
+	        {% csrf_token %}
 		    {% for form in education_form %}
 			    {{ form }}
 		    {% endfor %}

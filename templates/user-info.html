@@ -5,7 +5,9 @@
 
 {% block content %}
     <div class="user-info">
-        <h1>User info</h1>
-        {% crispy form %}
+	    <div class="user-info-header">
+		    <h1>Your specs</h1>
+		    {% crispy form %}
+	    </div>
     </div>
 {% endblock content %}
