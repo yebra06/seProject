@@ -2,15 +2,38 @@
 {% load staticfiles %}
 
 {% block content %}
+	<style>
+	.resume-builder {
+		display: flex;
+		justify-content: center;
+	}
+	.rb-form-section {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
+	</style>
     <div class="resume-builder">
-	    <form method="post" action="{% url 'resume-builder' %}">
-	        {% csrf_token %}
+	    <form class="rb-form" method="post" action="{% url 'resume-builder' %}">
+		    {% csrf_token %}
+
+		    {{ education_form.management_form }}
 		    {% for form in education_form %}
-			    {{ form }}
+			    <div class="rb-form-section">
+				    {{ form }}
+	            </div>
 		    {% endfor %}
+
+	        {{ experience_form.management_form }}
 		    {% for form in experience_form %}
-			    {{ form }}
+	            <div class="rb-form-section">
+			        {{ form }}
+	            </div>
 		    {% endfor %}
+
+	        <div class="rb-form-section">
+		        <button type="submit">Save Specs</button>
+	        </div>
 	    </form>
     </div>
 {% endblock content %}
