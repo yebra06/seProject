@@ -2,38 +2,44 @@
 {% load staticfiles %}
 
 {% block content %}
-	<style>
-	.resume-builder {
-		display: flex;
-		justify-content: center;
-	}
-	.rb-form-section {
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
-	}
-	</style>
-    <div class="resume-builder">
-	    <form class="rb-form" method="post" action="{% url 'resume-builder' %}">
-		    {% csrf_token %}
+	<div class="resume-builder">
+		<form class="rb-form" method="post" action="{% url 'resume-builder' %}">
+			{% csrf_token %}
+			<div id="education-form">
+				<h3>Education</h3>
+				{% for form in education_formset %}
+					<div class="education-form-section">
+						{{ form.school }}
+					</div>
+				{% endfor %}
+			</div>
+			<div id="experience-form">
+				<h3>Experience</h3>
+				{% for form in experience_formset %}
+					<div class="experience-form-section">
+						{{ form.title }}
+						{{ form.start_month_year }}
+						{{ form.end_month_year }}
+					</div>
+				{% endfor %}
+			</div>
 
-		    {{ education_form.management_form }}
-		    {% for form in education_form %}
-			    <div class="rb-form-section">
-				    {{ form }}
-	            </div>
-		    {% endfor %}
-
-	        {{ experience_form.management_form }}
-		    {% for form in experience_form %}
-	            <div class="rb-form-section">
-			        {{ form }}
-	            </div>
-		    {% endfor %}
-
-	        <div class="rb-form-section">
-		        <button type="submit">Save Specs</button>
-	        </div>
-	    </form>
-    </div>
+			<input type="submit" class="button" value="Save Specs"/>
+			{{ education_formset.management_form }}
+			{{ experience_formset.management_form }}
+		</form>
+	</div>
 {% endblock content %}
+
+{% block scripts %}
+	<script>
+	    $(function() {
+	        $('#education-form .education-form-section').formset({
+		        prefix: 'education'
+	        });
+	        $('#experience-form .experience-form-section').formset({
+		        prefix:'experience'
+	        });
+	    })
+	</script>
+{% endblock %}

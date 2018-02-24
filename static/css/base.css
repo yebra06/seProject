@@ -90,3 +90,10 @@ a {
 .login-header {
     color: rgb(5, 191, 250);
 }
+
+/* Resume Builder */
+.resume-builder {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}

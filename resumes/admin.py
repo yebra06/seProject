@@ -3,6 +3,16 @@ from django.contrib import admin
 from .models import Education, Experience, Resume
 
 
-admin.register(Resume)
-admin.site.register(Education)
-admin.site.register(Experience)
+class EducationInline(admin.TabularInline):
+    model = Education
+
+
+class ExperienceInline(admin.TabularInline):
+    model = Experience
+
+
+class ResumeAdmin(admin.ModelAdmin):
+    inlines = [EducationInline, ExperienceInline]
+
+
+admin.site.register(Resume, ResumeAdmin)

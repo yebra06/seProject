@@ -1,16 +1,7 @@
-from django.forms import modelformset_factory, BaseModelFormSet, inlineformset_factory, BaseInlineFormSet
+from django import forms
 
-from .models import Education, Experience
-
-
-class EducationFormsetCleaner(BaseModelFormSet):
-    def clean(self):
-        super().clean()
-        for form in self.forms:
-            school = form.cleaned_data['school'].title()
-            form.cleaned_data['school'] = school
-            form.instance.school = school
+from .models import Education, Experience, Resume
 
 
-EducationFormset = modelformset_factory(Education, exclude=('resume',), formset=EducationFormsetCleaner, max_num=10)
-ExperienceFormset = modelformset_factory(Experience, exclude=('resume',))
+EducationFormset = forms.inlineformset_factory(Resume, Education, exclude=('resume',), min_num=1, max_num=5)
+ExperienceFormset = forms.inlineformset_factory(Resume, Experience, exclude=('resume',), min_num=1, max_num=10)
