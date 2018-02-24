@@ -57,18 +57,10 @@
 {% block scripts %}
 	<script>
 	    $(function() {
-	        $('#education-form .education-form-section').formset({
-		        prefix: 'education'
-	        });
-	        $('#experience-form .experience-form-section').formset({
-		        prefix: 'experience'
-	        });
-	        $('#awards-form .awards-form-section').formset({
-		        prefix: 'awards'
-	        });
-	        $('#skills-form .skills-form-section').formset({
-		        prefix: 'skills'
-	        });
+	        $('#education-form .education-form-section').formset({prefix: 'education'});
+	        $('#experience-form .experience-form-section').formset({prefix: 'experience'});
+	        $('#awards-form .awards-form-section').formset({prefix: 'awards'});
+	        $('#skills-form .skills-form-section').formset({prefix: 'skills'});
 	    })
 	</script>
 {% endblock %}

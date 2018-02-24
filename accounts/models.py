@@ -13,4 +13,4 @@ class Profile(AbstractUser):
 
     @property
     def address(self):
-        return ' '.join([self.street.title(), self.city, self.state.upper(), self.zipcode])
+        return ', '.join([self.street.title(), self.city, self.state.upper(), self.zipcode])

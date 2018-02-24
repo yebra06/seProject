@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.views.generic.detail import DetailView
+from django.utils.decorators import method_decorator
 
 from easy_pdf.views import PDFTemplateResponseMixin
 
@@ -72,3 +73,11 @@ def user_logout(request):
 class UserResume(PDFTemplateResponseMixin, DetailView):
     model = Profile
     template_name = 'user-resume.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserResume, self).dispatch(request, *args, **kwargs)
