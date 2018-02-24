@@ -13,6 +13,7 @@
 					</div>
 				{% endfor %}
 			</div>
+
 			<div id="experience-form">
 				<h3>Experience</h3>
 				{% for form in experience_formset %}
@@ -24,9 +25,31 @@
 				{% endfor %}
 			</div>
 
+			<div id="skills-form">
+				<h3>Skills</h3>
+				{% for form in skills_formset %}
+					<div class="skills-form-section">
+						{{ form.skill }}
+					</div>
+				{% endfor %}
+			</div>
+
+			<div id="awards-form">
+				<h3>Awards</h3>
+				{% for form in awards_formset %}
+					<div class="awards-form-section">
+						{{ form.award }}
+						{{ form.year }}
+					</div>
+				{% endfor %}
+			</div>
+
 			<input type="submit" class="button" value="Save Specs"/>
+
 			{{ education_formset.management_form }}
 			{{ experience_formset.management_form }}
+			{{ awards_formset.management_form }}
+			{{ skills_formset.management_form }}
 		</form>
 	</div>
 {% endblock content %}
@@ -38,7 +61,13 @@
 		        prefix: 'education'
 	        });
 	        $('#experience-form .experience-form-section').formset({
-		        prefix:'experience'
+		        prefix: 'experience'
+	        });
+	        $('#awards-form .awards-form-section').formset({
+		        prefix: 'awards'
+	        });
+	        $('#skills-form .skills-form-section').formset({
+		        prefix: 'skills'
 	        });
 	    })
 	</script>

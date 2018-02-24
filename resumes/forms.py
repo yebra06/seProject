@@ -1,7 +1,9 @@
-from django import forms
+from django.forms import inlineformset_factory
 
-from .models import Education, Experience, Resume
+from .models import Awards, Education, Experience, Resume, Skills
 
 
-EducationFormset = forms.inlineformset_factory(Resume, Education, exclude=('resume',), min_num=1, max_num=5)
-ExperienceFormset = forms.inlineformset_factory(Resume, Experience, exclude=('resume',), min_num=1, max_num=10)
+EducationFormset = inlineformset_factory(Resume, Education, exclude=('resume',), extra=1, min_num=1, max_num=5)
+ExperienceFormset = inlineformset_factory(Resume, Experience, exclude=('resume',), extra=1, min_num=1, max_num=10)
+SkillsFormset = inlineformset_factory(Resume, Skills, exclude=('resume',), extra=1, min_num=1, max_num=20)
+AwardsFormset = inlineformset_factory(Resume, Awards, exclude=('resume',), extra=1, min_num=1, max_num=10)
