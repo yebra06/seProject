@@ -2,17 +2,12 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
-
 {% block content %}
-	<style>
-	.user-info {
-		display: flex;
-		justify-content: center;
-	}
-	</style>
     <div class="user-info">
-	    <div class="user-info-header">
+	    <div class="user-info-section">
 		    <h1>Your specs</h1>
+	    </div>
+	    <div class="user-info-section">
 		    {% crispy form %}
 	    </div>
     </div>

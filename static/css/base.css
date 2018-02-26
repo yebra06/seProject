@@ -1,3 +1,4 @@
+/* Todo: Split into separate style sheets. */
 
 html {
     -webkit-box-sizing: border-box;
@@ -24,10 +25,24 @@ a {
 }
 
 input {
-  border: 0;
-  outline: 0;
-  background: transparent;
-  border-bottom: 1px solid black;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid rgb(5, 191, 250);
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    background-color: transparent;
+    border: 3px solid lavender;
+    line-height: 1;
+    padding: 1em 2em;
+}
+
+.btn:hover {
+    box-shadow: inset 0 0 0 2em lavender;
 }
 
 /* Navbar */
@@ -40,34 +55,29 @@ input {
     background-color: lavender;
     text-transform: capitalize;
 }
-
 .nav-link {
     font-size: 15px;
     padding: 0 15px;
     color: black;
 }
-
 .nav-link.left {
     margin: 0 auto 0 15px;
     padding: 0;
 }
 
-/* User Profile */
+/* user-profile.html */
 .user-profile {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-
 .user-profile-section {
     display: flex;
     justify-content: center;
 }
-
 .user-profile-header {
     color: rgb(5, 191, 250);
 }
-
 .user-profile-btn {
     display: flex;
     align-items: stretch;
@@ -77,9 +87,26 @@ input {
     margin: 0.5em;
     padding: 1em 2em;
 }
-
 .user-profile-btn:hover {
     box-shadow: inset 0 0 0 2em lavender;
+}
+
+/* user-info.html */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.user-info-section {
+    display: flex;
+    justify-content: center;
+}
+.user-info-section:last-of-type {
+    padding-top: 25px;
+}
+.user-info-form input {
+    margin: 10px 0;
 }
 
 /* Login/Signup */
@@ -88,17 +115,15 @@ input {
     justify-content: center;
     flex-direction: column;
 }
-
 .login-section {
     display: flex;
     justify-content: center;
 }
-
 .login-header {
     color: rgb(5, 191, 250);
 }
 
-/* Resume Builder */
+/* resume-builder.html */
 .resume-builder {
     display: flex;
     justify-content: center;

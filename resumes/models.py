@@ -15,16 +15,16 @@ class ResumeSection(models.Model):
 
 
 class Experience(ResumeSection):
-    title = models.CharField(max_length=150, blank=False)
-    start_month_year = models.CharField(max_length=4, blank=False)
-    end_month_year = models.CharField(max_length=4, blank=False)
+    title = models.CharField(max_length=150, blank=True)
+    start_month_year = models.CharField(max_length=4, blank=True)
+    end_month_year = models.CharField(max_length=4, blank=True)
 
     def __str__(self):
         return '{} - {} {}'.format(self.title, self.start_month_year, self.end_month_year)
 
 
 class Education(ResumeSection):
-    school = models.CharField(max_length=255, blank=False)
+    school = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return '{}'.format(self.school)

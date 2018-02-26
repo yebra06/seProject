@@ -1,7 +1,7 @@
 from django import forms
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Field, Layout, Submit
+from crispy_forms.layout import ButtonHolder, Field, Layout, Submit
 
 from .models import Profile
 
@@ -47,6 +47,7 @@ class UserForm(forms.ModelForm):
         self.helper.form_class = 'user-info-form'
         self.helper.form_method = 'post'
         self.helper.form_action = 'user-info'
+        self.helper.form_show_labels = False
         self.helper.layout = Layout(
             Field('first_name', placeholder=self.instance.first_name or 'First name'),
             Field('last_name', placeholder=self.instance.last_name or 'Last name'),
@@ -56,4 +57,8 @@ class UserForm(forms.ModelForm):
             Field('city', placeholder=self.instance.city or 'City'),
             Field('state', placeholder=self.instance.state or 'State'),
             Field('zipcode', placeholder=self.instance.zipcode or 'Zipcode'),
-            Submit('submit', 'Submit'))
+            ButtonHolder(
+                Submit('submit', 'Save Specs', css_class='btn'),
+                css_class='user-info-section'
+            )
+        )
