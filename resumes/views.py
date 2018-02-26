@@ -10,9 +10,10 @@ from .models import Resume
 
 @login_required
 def resume_builder(request):
-    resume = Resume.objects.filter(user=request.user).first()
-    if resume is None:
-        resume = Resume.objects.create(user=request.user)
+    # resume = Resume.objects.filter(user=request.user).first()
+    # if resume is None:
+    #     resume = Resume.objects.create(user=request.user)
+    resume, _ = Resume.objects.get_or_create(user=request.user)
     education_formset = EducationFormset(prefix='education')
     experience_formset = ExperienceFormset(prefix='experience')
     awards_formset = AwardsFormset(prefix='awards')
