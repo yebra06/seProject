@@ -5,11 +5,12 @@
 	<div class="resume-builder">
 		<form class="rb-form" method="post" action="{% url 'resume-builder' %}">
 			{% csrf_token %}
+
 			<div id="education-form">
 				<h3>Education</h3>
 				{% for form in education_formset %}
 					<div class="education-form-section">
-						{{ form.school }}
+						{{ form }}
 					</div>
 				{% endfor %}
 			</div>
@@ -18,9 +19,7 @@
 				<h3>Experience</h3>
 				{% for form in experience_formset %}
 					<div class="experience-form-section">
-						{{ form.title }}
-						{{ form.start_month_year }}
-						{{ form.end_month_year }}
+						{{ form}}
 					</div>
 				{% endfor %}
 			</div>
@@ -29,7 +28,7 @@
 				<h3>Skills</h3>
 				{% for form in skills_formset %}
 					<div class="skills-form-section">
-						{{ form.skill }}
+						{{ form }}
 					</div>
 				{% endfor %}
 			</div>
@@ -38,13 +37,12 @@
 				<h3>Awards</h3>
 				{% for form in awards_formset %}
 					<div class="awards-form-section">
-						{{ form.award }}
-						{{ form.year }}
+						{{ form }}
 					</div>
 				{% endfor %}
 			</div>
 
-			<input type="submit" class="button" value="Save Specs"/>
+			<input type="submit" class="button" value="Generate Resume"/>
 
 			{{ education_formset.management_form }}
 			{{ experience_formset.management_form }}

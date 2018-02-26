@@ -3,12 +3,8 @@ from __future__ import unicode_literals
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-from django.views.generic.detail import DetailView
-
-from easy_pdf.views import PDFTemplateResponseMixin
 
 from .forms import LoginForm, SignupForm, UserForm
-from .models import Profile
 
 
 def index(request):
@@ -73,15 +69,3 @@ def user_info(request):
 def user_logout(request):
     logout(request)
     return redirect('index')
-
-
-class UserResume(PDFTemplateResponseMixin, DetailView):
-    model = Profile
-    template_name = 'user-resume.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-    def dispatch(self, request, *args, **kwargs):
-        return super(UserResume, self).dispatch(request, *args, **kwargs)

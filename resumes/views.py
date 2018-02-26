@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.views.generic.detail import DetailView
+
+from easy_pdf.views import PDFTemplateResponseMixin
 
 from .forms import AwardsFormset, EducationFormset, ExperienceFormset, SkillsFormset
-
 from .models import Resume
 
 
@@ -25,9 +27,22 @@ def resume_builder(request):
             experience_formset.save()
             awards_formset.save()
             skills_formset.save()
+            return redirect('resume', pk=resume.pk)
     return render(request, 'resume-builder.html', {
         'education_formset': education_formset,
         'experience_formset': experience_formset,
         'awards_formset': awards_formset,
         'skills_formset': skills_formset,
     })
+
+
+class ResumeView(PDFTemplateResponseMixin, DetailView):
+    model = Resume
+    template_name = 'resume.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        return super(ResumeView, self).dispatch(request, *args, **kwargs)
