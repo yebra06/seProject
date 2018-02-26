@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.views.generic.detail import DetailView
-from django.utils.decorators import method_decorator
 
 from easy_pdf.views import PDFTemplateResponseMixin
 
@@ -60,7 +59,13 @@ def user_info(request):
     if request.method == 'POST':
         form = UserForm(request.POST, instance=request.user)
         if form.is_valid():
-            request.user = form.save()
+            user = form.save(commit=False)
+            user.first_name = form.cleaned_data.get('first_name').capitalize()
+            user.last_name = form.cleaned_data.get('last_name').title()
+            user.street = form.cleaned_data.get('street').title()
+            user.city = form.cleaned_data.get('city').title()
+            user.state = form.cleaned_data.get('state').title()
+            user.save()
             return redirect('user-profile')
     return render(request, 'user-info.html', {'form': form})
 
@@ -76,7 +81,6 @@ class UserResume(PDFTemplateResponseMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
         return context
 
     def dispatch(self, request, *args, **kwargs):

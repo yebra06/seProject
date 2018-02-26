@@ -38,7 +38,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'email', 'phone_number', 'city', 'state', 'zipcode')
+        fields = ('first_name', 'last_name', 'email', 'phone_number', 'street', 'city', 'state', 'zipcode')
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
@@ -48,11 +48,12 @@ class UserForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.form_action = 'user-info'
         self.helper.layout = Layout(
-            Field('first_name', placeholder=self.instance.first_name or 'first name'),
-            Field('last_name', placeholder=self.instance.last_name or 'last name'),
+            Field('first_name', placeholder=self.instance.first_name or 'First name'),
+            Field('last_name', placeholder=self.instance.last_name or 'Last name'),
             Field('email', placeholder=self.instance.email, required=False),
-            Field('phone_number', placeholder=self.instance.phone_number or 'phone'),
-            Field('city', placeholder=self.instance.city or 'city'),
-            Field('state', placeholder=self.instance.state or 'state'),
-            Field('zipcode', placeholder=self.instance.zipcode or 'zipcode'),
+            Field('phone_number', placeholder=self.instance.phone_number or 'Phone'),
+            Field('street', placeholder=self.instance.street or 'Street'),
+            Field('city', placeholder=self.instance.city or 'City'),
+            Field('state', placeholder=self.instance.state or 'State'),
+            Field('zipcode', placeholder=self.instance.zipcode or 'Zipcode'),
             Submit('submit', 'Submit'))

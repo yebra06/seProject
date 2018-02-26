@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from resumes.models import Resume
+
 
 class Profile(AbstractUser):
     phone_number = models.CharField(max_length=20, blank=True)
@@ -13,4 +15,4 @@ class Profile(AbstractUser):
 
     @property
     def address(self):
-        return ', '.join([self.street.title(), self.city, self.state.upper(), self.zipcode])
+        return ', '.join([self.street, self.city, self.state + ' ' + self.zipcode])
