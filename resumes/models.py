@@ -15,19 +15,22 @@ class ResumeSection(models.Model):
 
 
 class Experience(ResumeSection):
+    company = models.CharField(max_length=255, blank=True)
     title = models.CharField(max_length=150, blank=True)
     start_month_year = models.CharField(max_length=4, blank=True)
     end_month_year = models.CharField(max_length=4, blank=True)
 
     def __str__(self):
-        return '{} - {} {}'.format(self.title, self.start_month_year, self.end_month_year)
+        return '{} {} - {} {}'.format(self.company, self.title, self.start_month_year, self.end_month_year)
 
 
 class Education(ResumeSection):
     school = models.CharField(max_length=255, blank=True)
+    graduation_year = models.IntegerField(blank=True, null=True)
+    degree = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return '{}'.format(self.school)
+        return '{} {}'.format(self.school, self.degree)
 
 
 class Skills(ResumeSection):
@@ -39,7 +42,7 @@ class Skills(ResumeSection):
 
 class Awards(ResumeSection):
     award = models.CharField(max_length=255, blank=True)
-    year = models.IntegerField(blank=True)
+    year = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return '{} - {}'.format(self.award, str(self.year))

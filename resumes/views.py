@@ -10,9 +10,6 @@ from .models import Resume
 
 @login_required
 def resume_builder(request):
-    # resume = Resume.objects.filter(user=request.user).first()
-    # if resume is None:
-    #     resume = Resume.objects.create(user=request.user)
     resume, _ = Resume.objects.get_or_create(user=request.user)
     education_formset = EducationFormset(prefix='education')
     experience_formset = ExperienceFormset(prefix='experience')
@@ -23,7 +20,10 @@ def resume_builder(request):
         experience_formset = ExperienceFormset(request.POST, prefix='experience', instance=resume)
         awards_formset = AwardsFormset(request.POST, prefix='awards', instance=resume)
         skills_formset = SkillsFormset(request.POST, prefix='skills', instance=resume)
-        if education_formset.is_valid() and experience_formset.is_valid() and awards_formset.is_valid() and skills_formset.is_valid():
+        if education_formset.is_valid()\
+                and experience_formset.is_valid()\
+                and awards_formset.is_valid()\
+                and skills_formset.is_valid():
             education_formset.save()
             experience_formset.save()
             awards_formset.save()

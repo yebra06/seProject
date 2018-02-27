@@ -21,7 +21,11 @@ class LoginForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field('email', placeholder='Email', required=True),
             Field('password', placeholder='Password', required=True),
-            Submit('submit', 'Submit'))
+            ButtonHolder(
+                Submit('submit', 'Submit', css_class='btn'),
+                css_class='login-form-btn'
+            )
+        )
 
 
 class SignupForm(LoginForm):

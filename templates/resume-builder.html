@@ -19,7 +19,7 @@
 				<h3>Experience</h3>
 				{% for form in experience_formset %}
 					<div class="experience-form-section">
-						{{ form}}
+						{{ form }}
 					</div>
 				{% endfor %}
 			</div>
@@ -42,7 +42,10 @@
 				{% endfor %}
 			</div>
 
-			<input type="submit" class="btn" value="Generate Resume"/>
+			<div class="resume-builder-btn">
+				<input type="submit" class="btn" value="Save"/>
+			</div>
+
 			<style>label{display: none;}</style>
 			{{ education_formset.management_form }}
 			{{ experience_formset.management_form }}
@@ -54,11 +57,12 @@
 
 {% block scripts %}
 	<script>
+		// Keep forms in order they're rendered.
 	    $(function() {
 	        $('#education-form .education-form-section').formset({prefix: 'education'});
 	        $('#experience-form .experience-form-section').formset({prefix: 'experience'});
+		    $('#skills-form .skills-form-section').formset({prefix: 'skills'});
 	        $('#awards-form .awards-form-section').formset({prefix: 'awards'});
-	        $('#skills-form .skills-form-section').formset({prefix: 'skills'});
 	    })
 	</script>
 {% endblock %}

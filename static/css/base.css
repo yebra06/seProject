@@ -122,10 +122,20 @@ input {
 .login-header {
     color: rgb(5, 191, 250);
 }
+.login-form-btn {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
 
 /* resume-builder.html */
 .resume-builder {
     display: flex;
     justify-content: center;
     width: 100%;
+}
+.resume-builder-btn {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
 }
