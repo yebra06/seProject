@@ -6,12 +6,6 @@
 		<form class="rb-form" method="post" action="{% url 'resume-builder' %}">
 			{% csrf_token %}
 
-			<style>
-				.existing {
-					display: flex;
-					flex-direction: column;
-				}
-			</style>
 			<div id="education-form">
 				<h3>Education</h3>
 				<div class="existing">
@@ -21,7 +15,6 @@
 						</div>
 					{% endfor %}
 				</div>
-
 				{% for form in education_formset %}
 					<div class="education-form-section">
 						{{ form }}

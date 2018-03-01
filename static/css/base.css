@@ -139,3 +139,7 @@ input {
     justify-content: center;
     padding-top: 20px;
 }
+.existing {
+    display: flex;
+    flex-direction: column;
+}
