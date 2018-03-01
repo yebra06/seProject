@@ -36,6 +36,10 @@ def resume_builder(request):
             experience_formset.save()
             awards_formset.save()
             skills_formset.save()
+            education_formset = EducationFormset(prefix='education')
+            experience_formset = ExperienceFormset(prefix='experience')
+            awards_formset = AwardsFormset(prefix='awards')
+            skills_formset = SkillsFormset(prefix='skills')
             # return redirect('resume', pk=resume.pk)
     return render(request, 'resume-builder.html', {
         'education_formset': education_formset,
