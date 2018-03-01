@@ -3,6 +3,11 @@ from django.forms import inlineformset_factory
 
 from .models import Awards, Education, Experience, Resume, Skills
 
+# Formsets
+
+# Todo: Validation on inputs.
+# Todo: Dropdowns maybe?
+
 
 EducationFormset = inlineformset_factory(
     Resume, Education, exclude=('resume',), extra=0, min_num=1, max_num=5, widgets={

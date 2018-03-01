@@ -3,6 +3,8 @@ from django.db import models
 
 
 class Resume(models.Model):
+    # This model has many-to-one relationship with Profile model in accounts/models.py.
+    # This model has one-to-many relationship with ResumeSection.
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     @property
@@ -11,6 +13,7 @@ class Resume(models.Model):
 
 
 class ResumeSection(models.Model):
+    # This model has a many-to-one relationship with Resume 1 resume has many ResumeSections.
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
 
 
