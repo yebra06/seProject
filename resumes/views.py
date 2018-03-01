@@ -5,7 +5,7 @@ from django.views.generic.detail import DetailView
 from easy_pdf.views import PDFTemplateResponseMixin
 
 from .forms import AwardsFormset, EducationFormset, ExperienceFormset, SkillsFormset
-from .models import Resume
+from .models import Awards, Education, Experience, Resume, Skills
 
 
 @login_required
@@ -15,6 +15,14 @@ def resume_builder(request):
     experience_formset = ExperienceFormset(prefix='experience')
     awards_formset = AwardsFormset(prefix='awards')
     skills_formset = SkillsFormset(prefix='skills')
+
+    existing = {
+        'education': Education.objects.filter(resume__user=request.user),
+        'experience': Experience.objects.filter(resume__user=request.user),
+        'awards': Awards.objects.filter(resume__user=request.user),
+        'skills': Skills.objects.filter(resume__user=request.user)
+    }
+
     if request.method == 'POST':
         education_formset = EducationFormset(request.POST, prefix='education', instance=resume)
         experience_formset = ExperienceFormset(request.POST, prefix='experience', instance=resume)
@@ -28,12 +36,13 @@ def resume_builder(request):
             experience_formset.save()
             awards_formset.save()
             skills_formset.save()
-            return redirect('resume', pk=resume.pk)
+            # return redirect('resume', pk=resume.pk)
     return render(request, 'resume-builder.html', {
         'education_formset': education_formset,
         'experience_formset': experience_formset,
         'awards_formset': awards_formset,
         'skills_formset': skills_formset,
+        'existing': existing
     })
 
 

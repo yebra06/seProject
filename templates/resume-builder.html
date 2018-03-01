@@ -6,8 +6,22 @@
 		<form class="rb-form" method="post" action="{% url 'resume-builder' %}">
 			{% csrf_token %}
 
+			<style>
+				.existing {
+					display: flex;
+					flex-direction: column;
+				}
+			</style>
 			<div id="education-form">
 				<h3>Education</h3>
+				<div class="existing">
+					{% for i in existing.education %}
+						<div class="existing-section">
+							{{ i }}
+						</div>
+					{% endfor %}
+				</div>
+
 				{% for form in education_formset %}
 					<div class="education-form-section">
 						{{ form }}
@@ -17,6 +31,13 @@
 
 			<div id="experience-form">
 				<h3>Experience</h3>
+				<div class="existing">
+					{% for i in existing.experience %}
+						<div class="existing-section">
+							{{ i }}
+						</div>
+					{% endfor %}
+				</div>
 				{% for form in experience_formset %}
 					<div class="experience-form-section">
 						{{ form }}
@@ -26,6 +47,13 @@
 
 			<div id="skills-form">
 				<h3>Skills</h3>
+				<div class="existing">
+					{% for i in existing.skills %}
+						<div class="existing-section">
+							{{ i }}
+						</div>
+					{% endfor %}
+				</div>
 				{% for form in skills_formset %}
 					<div class="skills-form-section">
 						{{ form }}
@@ -35,6 +63,13 @@
 
 			<div id="awards-form">
 				<h3>Awards</h3>
+				<div class="existing">
+					{% for i in existing.awards %}
+						<div class="existing-section">
+							{{ i }}
+						</div>
+					{% endfor %}
+				</div>
 				{% for form in awards_formset %}
 					<div class="awards-form-section">
 						{{ form }}

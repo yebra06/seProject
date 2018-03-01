@@ -30,7 +30,7 @@ class Education(ResumeSection):
     degree = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return '{} {}'.format(self.school, self.degree)
+        return ' '.join([self.school, str(self.graduation_year), self.degree])
 
 
 class Skills(ResumeSection):

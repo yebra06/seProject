@@ -9,6 +9,9 @@ Django web app for CS 4398 Texas State University.
 - Tools > Run manage.py Task...
     $ runserver
 
+## Testing
+$ python manage.py test
+
 ## Developers
 - Michael Christenson
 - Henderson Cooper
