@@ -3,12 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="user-info">
-	    <div class="user-info-section">
-		    <h1>Your specs</h1>
-	    </div>
-	    <div class="user-info-section">
-		    {% crispy form %}
-	    </div>
-    </div>
+	<style>
+	label {
+		margin-bottom: 0;
+	}
+	</style>
+	<div class="container-fluid">
+		<h1 style="text-align: center;">Your Specs</h1>
+		<div class="row">
+			<div class="col-sm-4 offset-sm-4">
+                {% crispy form %}
+				<button type="button" class="btn btn-primary">Save</button>
+			</div>
+		</div>
+	</div>
 {% endblock content %}

@@ -2,13 +2,7 @@
 {% load staticfiles %}
 
 {% block content %}
-    <div class="user-profile">
-        <div class="user-profile-section">
-	        <h1 class="user-profile-header">{{ fullname }}</h1>
-        </div>
-	    <div class="user-profile-section">
-		    <a class="user-profile-btn" href="{% url 'user-info'  %}">Edit Profile</a>
-		    <a class="user-profile-btn" href="{% url 'resume-builder'  %}">Create a Resume</a>
-	    </div>
-    </div>
+	<h1>{{ fullname }}</h1>
+	<a href="{% url 'user-info'  %}">Edit Profile</a>
+	<a href="{% url 'resume-builder'  %}">Create a Resume</a>
 {% endblock %}
