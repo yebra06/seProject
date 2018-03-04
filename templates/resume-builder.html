@@ -2,84 +2,88 @@
 {% load staticfiles %}
 
 {% block content %}
-	<div class="resume-builder">
-		<form class="rb-form" method="post" action="{% url 'resume-builder' %}">
-			{% csrf_token %}
-
-			<div id="education-form">
-				<h3>Education</h3>
-				<div class="existing">
-					{% for i in existing.education %}
-						<div class="existing-section">
-							{{ i }}
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-12">
+				<form method="post" action="{% url 'resume-builder' %}">
+					{% csrf_token %}
+					<div id="education-form">
+						<h3>Education</h3>
+						<div class="existing">
+							{% for i in existing.education %}
+								<div class="existing-section">
+									{{ i }}
+								</div>
+							{% endfor %}
 						</div>
-					{% endfor %}
-				</div>
-				{% for form in education_formset %}
-					<div class="education-form-section">
-						{{ form }}
+						{% for form in education_formset %}
+							<div class="education-form-section">
+								{{ form }}
+							</div>
+						{% endfor %}
 					</div>
-				{% endfor %}
-			</div>
 
-			<div id="experience-form">
-				<h3>Experience</h3>
-				<div class="existing">
-					{% for i in existing.experience %}
-						<div class="existing-section">
-							{{ i }}
+					<div id="experience-form">
+						<h3>Experience</h3>
+						<div class="existing">
+							{% for i in existing.experience %}
+								<div class="existing-section">
+									{{ i }}
+								</div>
+							{% endfor %}
 						</div>
-					{% endfor %}
-				</div>
-				{% for form in experience_formset %}
-					<div class="experience-form-section">
-						{{ form }}
+						{% for form in experience_formset %}
+							<div class="experience-form-section">
+								{{ form }}
+							</div>
+						{% endfor %}
 					</div>
-				{% endfor %}
-			</div>
 
-			<div id="skills-form">
-				<h3>Skills</h3>
-				<div class="existing">
-					{% for i in existing.skills %}
-						<div class="existing-section">
-							{{ i }}
+					<div id="skills-form">
+						<h3>Skills</h3>
+						<div class="existing">
+							{% for i in existing.skills %}
+								<div class="existing-section">
+									{{ i }}
+								</div>
+							{% endfor %}
 						</div>
-					{% endfor %}
-				</div>
-				{% for form in skills_formset %}
-					<div class="skills-form-section">
-						{{ form }}
+						{% for form in skills_formset %}
+							<div class="skills-form-section">
+								{{ form }}
+							</div>
+						{% endfor %}
 					</div>
-				{% endfor %}
-			</div>
 
-			<div id="awards-form">
-				<h3>Awards</h3>
-				<div class="existing">
-					{% for i in existing.awards %}
-						<div class="existing-section">
-							{{ i }}
+					<div id="awards-form">
+						<h3>Awards</h3>
+						<div class="existing">
+							{% for i in existing.awards %}
+								<div class="existing-section">
+									{{ i }}
+								</div>
+							{% endfor %}
 						</div>
-					{% endfor %}
-				</div>
-				{% for form in awards_formset %}
-					<div class="awards-form-section">
-						{{ form }}
+						{% for form in awards_formset %}
+							<div class="awards-form-section">
+								{{ form }}
+							</div>
+						{% endfor %}
 					</div>
-				{% endfor %}
-			</div>
 
-			<div class="resume-builder-btn">
-				<input type="submit" class="btn" value="Save"/>
+					<div class="resume-builder-btn">
+						<input type="submit" class="btn" value="Save"/>
+					</div>
+					<style>
+						label {display: none;}
+					</style>
+					{{ education_formset.management_form }}
+					{{ experience_formset.management_form }}
+					{{ awards_formset.management_form }}
+					{{ skills_formset.management_form }}
+				</form>
 			</div>
-
-			<style>label{display: none;}</style>
-			{{ education_formset.management_form }}
-			{{ experience_formset.management_form }}
-			{{ awards_formset.management_form }}
-			{{ skills_formset.management_form }}
-		</form>
+		</div>
 	</div>
 {% endblock content %}
 

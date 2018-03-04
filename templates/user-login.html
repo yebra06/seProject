@@ -3,7 +3,14 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-	<form method="post" action="{% url 'login' %}">
-		{% crispy form %}
-	</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 offset-sm-4">
+				<h1>Login</h1>
+				<form method="post" action="{% url 'login' %}">
+					{% crispy form %}
+				</form>
+			</div>
+		</div>
+	</div>
 {% endblock %}

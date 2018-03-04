@@ -21,10 +21,7 @@ class LoginForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field('email', placeholder='Email', required=True),
             Field('password', placeholder='Password', required=True),
-            ButtonHolder(
-                Submit('submit', 'Submit', css_class='btn'),
-                css_class='login-form-btn'
-            )
+            ButtonHolder(Submit('submit', 'Submit', css_class='btn'))
         )
 
 
@@ -52,3 +49,14 @@ class UserForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.form_action = 'user-info'
         self.helper.form_show_labels = True
+        self.helper.layout = Layout(
+            Field('first_name', placeholder=self.instance.first_name or 'First name'),
+            Field('last_name', placeholder=self.instance.last_name or 'Last name'),
+            Field('email', placeholder=self.instance.email, required=False),
+            Field('phone_number', placeholder=self.instance.phone_number or 'Phone'),
+            Field('street', placeholder=self.instance.street or 'Street'),
+            Field('city', placeholder=self.instance.city or 'City'),
+            Field('state', placeholder=self.instance.state or 'State'),
+            Field('zipcode', placeholder=self.instance.zipcode or 'Zipcode'),
+            ButtonHolder(Submit('submit', 'Save Specs', css_class='btn'))
+        )
