@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
 
 from easy_pdf.views import PDFTemplateResponseMixin
@@ -65,7 +66,9 @@ class ResumeView(PDFTemplateResponseMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['profile'] = self.request.user
         return context
 
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(ResumeView, self).dispatch(request, *args, **kwargs)
