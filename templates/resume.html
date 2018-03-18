@@ -1,5 +1,37 @@
 {% extends "easy_pdf/base.html" %}
 
 {% block content %}
+	<style>
+	.name {
+		text-align: center;
+		font-size: 40px;
+	}
+	.contact {
+		text-align: center;
+		font-size: 15px;
+	}
+	</style>
 
+	<!-- resume header -->
+	<div class="name">
+		{{ profile.get_full_name }}
+	</div>
+	<div class="contact">
+		{{ profile.address }} {{ profile.phone_number }} {{ profile.email }}
+	</div>
+
+	<!-- education -->
+	<div class="education">
+
+	</div>
+
+	<!-- experience -->
+	<div class="experience">
+
+	</div>
+
+	<!-- awards -->
+	<div class="awards">
+
+	</div>
 {% endblock %}

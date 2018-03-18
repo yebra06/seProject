@@ -33,6 +33,7 @@ def resume_builder(request):
         experience_formset = ExperienceFormset(request.POST, prefix='experience', instance=resume)
         awards_formset = AwardsFormset(request.POST, prefix='awards', instance=resume)
         skills_formset = SkillsFormset(request.POST, prefix='skills', instance=resume)
+
         if education_formset.is_valid()\
                 and experience_formset.is_valid()\
                 and awards_formset.is_valid()\
@@ -44,11 +45,7 @@ def resume_builder(request):
             awards_formset.save()
             skills_formset.save()
 
-            # Now lets clear the form since we already saved.
-            education_formset = EducationFormset(prefix='education')
-            experience_formset = ExperienceFormset(prefix='experience')
-            awards_formset = AwardsFormset(prefix='awards')
-            skills_formset = SkillsFormset(prefix='skills')
+            return redirect('resume', pk=request.user.pk)
 
     return render(request, 'resume-builder.html', {
         'education_formset': education_formset,
@@ -59,7 +56,6 @@ def resume_builder(request):
     })
 
 
-# Todo: Add resume data from form to pdf.
 class ResumeView(PDFTemplateResponseMixin, DetailView):
     model = Resume
     template_name = 'resume.html'
