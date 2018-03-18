@@ -11,6 +11,9 @@ class Resume(models.Model):
     def sections(self):
         return ResumeSection.objects.filter(resume=self)
 
+    def __str__(self):
+        return self.user.email
+
 
 class ResumeSection(models.Model):
     # This model has a many-to-one relationship with Resume 1 resume has many ResumeSections.
@@ -20,11 +23,13 @@ class ResumeSection(models.Model):
 class Experience(ResumeSection):
     company = models.CharField(max_length=255, blank=True)
     title = models.CharField(max_length=150, blank=True)
-    start_month_year = models.CharField(max_length=4, blank=True)
-    end_month_year = models.CharField(max_length=4, blank=True)
+    start_month = models.IntegerField(blank=True, null=True)
+    start_year = models.IntegerField(blank=True, null=True)
+    end_month = models.IntegerField(blank=True, null=True)
+    end_year = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return '{} {} - {} {}'.format(self.company, self.title, self.start_month_year, self.end_month_year)
+        return '{} {}'.format(self.company, self.title)
 
 
 class Education(ResumeSection):
