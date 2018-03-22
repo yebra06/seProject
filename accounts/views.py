@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from .forms import LoginForm, SignupForm, UserForm
+from resumes.models import Resume
 
 
 def index(request):
@@ -46,7 +47,11 @@ def user_signup(request):
 
 @login_required
 def user_profile(request):
-    return render(request, 'user-profile.html', {'fullname': request.user.get_full_name() or 'User Profile'})
+    resume = Resume.objects.get(user=request.user) if Resume.objects.filter(user=request.user).exists() else None
+    return render(request, 'user-profile.html', {
+        'fullname': request.user.get_full_name() or 'User',
+        'resume': resume
+    })
 
 
 @login_required

@@ -15,19 +15,19 @@
 						<h3>{{ formset.prefix|title }}</h3>
 						{% if formset.prefix == 'education' %}
 							{% for i in existing.education %}
-								{{ i }}
+								{{ i }},
 							{% endfor %}
 						{% elif formset.prefix == 'experience' %}
 							{% for i in existing.experience %}
-								{{ i }}
+								{{ i }},
 							{% endfor %}
 						{% elif formset.prefix == 'skills' %}
 							{% for i in existing.skills %}
-								{{ i }}
+								{{ i }},
 							{% endfor %}
 						{% elif formset.prefix == 'awards' %}
 							{% for i in existing.awards  %}
-								{{ i }}
+								{{ i }},
 							{% endfor %}
 						{% endif %}
 						<table class="table" id="{{ formset.prefix }}-table">

@@ -2,6 +2,12 @@
 {% load staticfiles %}
 
 {% block content %}
+	<style>
+		button.btn {
+			color: white;
+			background-color: lightblue;
+		}
+	</style>
 	<div class="container" style="text-align: center;">
 		{% if request.user.is_authenticated %}
 			<div class="row justify-content-center">
@@ -10,6 +16,24 @@
 				</div>
 				<div class="col-lg-6">
 					<a href="{% url 'resume-builder' %}">Resume Builder</a>
+				</div>
+			</div>
+		{% else %}
+			<div class="row justify-content-center">
+				<div class="col">
+					<h1 style="font-size: 100px; margin-top: 20px;">Resume Generator</h1>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 20px;">
+				<div class="col-lg-6">
+					<button class="btn">
+						<a class="btn btn-lg" href="{% url 'signup' %}">Signup</a>
+					</button>
+				</div>
+				<div class="col-lg-6">
+					<button class="btn">
+						<a class="btn btn-lg" href="{% url 'login' %}">Login</a>
+					</button>
 				</div>
 			</div>
 		{% endif %}

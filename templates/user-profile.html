@@ -8,6 +8,9 @@
 				<h1>Hello, {{ fullname }}</h1>
 				<a href="{% url 'user-info'  %}">Edit Profile</a>
 				<a href="{% url 'resume-builder'  %}">Create a Resume</a>
+				{% if resume is not None %}
+					<a href="{% url 'resume' pk=request.user.id %}">Build Resume</a>
+				{% endif %}
 			</div>
 		</div>
 	</div>
