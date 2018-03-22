@@ -11,6 +11,7 @@
 				<form method="post" action="{% url 'resume-builder' %}">
 					{% csrf_token %}
 					{% for formset in formsets %}
+						{{ formset.management_form }}
 						<h3>{{ formset.prefix|title }}</h3>
 						{% if formset.prefix == 'education' %}
 							{% for i in existing.education %}
@@ -60,10 +61,6 @@
 		                    <input type="submit" name="submit" value="Save" class="btn btn-primary" id="submit-save">
 		                </div>
 					</div>
-					{{ education_formset.management_form }}
-					{{ experience_formset.management_form }}
-					{{ awards_formset.management_form }}
-					{{ skills_formset.management_form }}
 				</form>
 			</div>
 		</div>
