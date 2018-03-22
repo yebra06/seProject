@@ -2,5 +2,16 @@
 {% load staticfiles %}
 
 {% block content %}
-
+	<div class="container" style="text-align: center;">
+		{% if request.user.is_authenticated %}
+			<div class="row justify-content-center">
+				<div class="col-lg-6" >
+					<a href="{% url 'user-profile' %}">Profile</a>
+				</div>
+				<div class="col-lg-6">
+					<a href="{% url 'resume-builder' %}">Resume Builder</a>
+				</div>
+			</div>
+		{% endif %}
+	</div>
 {% endblock %}

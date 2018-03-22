@@ -1,83 +1,65 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_utils %}
+{% load crispy_forms_field %}
 
 {% block content %}
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12">
+		<div class="row justify-content-center">
+			<div class="col-md-10">
 				<form method="post" action="{% url 'resume-builder' %}">
 					{% csrf_token %}
-
-					<div id="education-form">
-						<h3>Education</h3>
-						<div class="existing">
+					{% for formset in formsets %}
+						<h3>{{ formset.prefix|title }}</h3>
+						{% if formset.prefix == 'education' %}
 							{% for i in existing.education %}
-								<div class="existing-section">
-									{{ i }}
-								</div>
+								{{ i }}
 							{% endfor %}
-						</div>
-						{% for form in education_formset %}
-							<div class="education-form-section">
-								{{ form }}
-							</div>
-						{% endfor %}
-					</div>
-
-					<div id="experience-form">
-						<h3>Experience</h3>
-						<div class="existing">
+						{% elif formset.prefix == 'experience' %}
 							{% for i in existing.experience %}
-								<div class="existing-section">
-									{{ i }}
-								</div>
+								{{ i }}
 							{% endfor %}
-						</div>
-						{% for form in experience_formset %}
-							<div class="experience-form-section">
-								{{ form }}
-							</div>
-						{% endfor %}
-					</div>
-
-					<div id="skills-form">
-						<h3>Skills</h3>
-						<div class="existing">
+						{% elif formset.prefix == 'skills' %}
 							{% for i in existing.skills %}
-								<div class="existing-section">
-									{{ i }}
-								</div>
+								{{ i }}
 							{% endfor %}
-						</div>
-						{% for form in skills_formset %}
-							<div class="skills-form-section">
-								{{ form }}
-							</div>
-						{% endfor %}
-					</div>
-
-					<div id="awards-form">
-						<h3>Awards</h3>
-						<div class="existing">
-							{% for i in existing.awards %}
-								<div class="existing-section">
-									{{ i }}
-								</div>
+						{% elif formset.prefix == 'awards' %}
+							{% for i in existing.awards  %}
+								{{ i }}
 							{% endfor %}
-						</div>
-						{% for form in awards_formset %}
-							<div class="awards-form-section">
-								{{ form }}
-							</div>
-						{% endfor %}
-					</div>
-
+						{% endif %}
+						<table class="table" id="{{ formset.prefix }}-table">
+							<thead>
+								<tr>
+									{% for field in formset.forms.0 %}
+	                                    {% if field.label and not field|is_checkbox and not field.is_hidden %}
+				                            <th for="{{ field.auto_id }}" scope="col" class="col-form-label {% if field.field.required %}requiredField{% endif %}">
+				                                {{ field.label|safe }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
+				                            </th>
+				                        {% endif %}
+	                                {% endfor %}
+								</tr>
+							</thead>
+							<tbody>
+					            {% for form in formset %}
+					                {% if form_show_errors and not form.is_extra %}
+					                    {% include "bootstrap4/errors.html" %}
+					                {% endif %}
+					                <tr>
+					                    {% for field in form %}
+					                        {% include 'bootstrap4/field.html' with tag="td" form_show_labels=False %}
+					                    {% endfor %}
+					                </tr>
+					            {% endfor %}
+					        </tbody>
+				        </table>
+					{% endfor %}
 					<div class="form-row justify-content-center">
 						<div class="form-actions">
 		                    <input type="submit" name="submit" value="Save" class="btn btn-primary" id="submit-save">
 		                </div>
 					</div>
-
 					{{ education_formset.management_form }}
 					{{ experience_formset.management_form }}
 					{{ awards_formset.management_form }}
@@ -90,12 +72,11 @@
 
 {% block scripts %}
 	<script>
-		// Keep forms in order they're rendered.
 	    $(function() {
-	        $('#education-form .education-form-section').formset({prefix: 'education'});
-	        $('#experience-form .experience-form-section').formset({prefix: 'experience'});
-		    $('#skills-form .skills-form-section').formset({prefix: 'skills'});
-	        $('#awards-form .awards-form-section').formset({prefix: 'awards'});
+	        $('#education-table tbody').formset({prefix: 'education'});
+	        $('#experience-table tbody').formset({prefix: 'experience'});
+	        $('#skills-table tbody').formset({prefix: 'skills'});
+	        $('#awards-table tbody').formset({prefix: 'awards'});
 	    })
 	</script>
 {% endblock %}

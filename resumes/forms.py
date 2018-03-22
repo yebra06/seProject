@@ -1,23 +1,29 @@
 from django import forms
-from django.forms import inlineformset_factory, BaseInlineFormSet
 
 from .choices import MONTHS, YEARS
 from .models import Awards, Education, Experience, Resume, Skills
 
-# Formsets
 
+class EducationForm(forms.ModelForm):
 
-# Todo: Validation on inputs.
-class ResumeFormset(BaseInlineFormSet):
+    class Meta:
+        model = Education
+        fields = '__all__'
+        exclude = ('resume',)
+
     def clean(self):
         super().clean()
-        for form in self.forms:
-            pass
+        school = self.cleaned_data['school']
+        degree = self.cleaned_data['degree']
+        if school == '' and degree != '':
+            raise forms.ValidationError('Please fill out degree.')
+        return self.cleaned_data
 
 
-EducationFormset = inlineformset_factory(
+EducationFormset = forms.inlineformset_factory(
     Resume,
     Education,
+    form=EducationForm,
     exclude=('resume',),
     extra=0,
     min_num=1,
@@ -29,7 +35,7 @@ EducationFormset = inlineformset_factory(
     }
 )
 
-ExperienceFormset = inlineformset_factory(
+ExperienceFormset = forms.inlineformset_factory(
     Resume,
     Experience,
     exclude=('resume',),
@@ -46,7 +52,7 @@ ExperienceFormset = inlineformset_factory(
     }
 )
 
-SkillsFormset = inlineformset_factory(
+SkillsFormset = forms.inlineformset_factory(
     Resume,
     Skills,
     exclude=('resume',),
@@ -58,7 +64,7 @@ SkillsFormset = inlineformset_factory(
     }
 )
 
-AwardsFormset = inlineformset_factory(
+AwardsFormset = forms.inlineformset_factory(
     Resume,
     Awards,
     exclude=('resume',),
