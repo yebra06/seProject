@@ -57,6 +57,10 @@ class ResumeView(PDFTemplateResponseMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['profile'] = self.request.user
+        context['education'] = Education.objects.filter(resume__user=self.request.user)
+        context['experience'] = Experience.objects.filter(resume__user=self.request.user)
+        context['awards'] = Awards.objects.filter(resume__user=self.request.user)
+        context['skills'] = Skills.objects.filter(resume__user=self.request.user)
         return context
 
     @method_decorator(login_required)
