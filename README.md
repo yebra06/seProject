@@ -1,25 +1,47 @@
 # seProject
-Django web app for CS 4398 Texas State University.
+[Django](https://www.djangoproject.com) web app for CS 4398 Texas State University.
 
-## Instructions
+## Requirements
+- [python3](https://www.python.org/downloads/) - Programming language.
+- [pip](https://pip.pypa.io/en/stable/installing/) - Python package manager.
+- [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) - Isolated development environment.
+
+## Pycharm Instructions
 - Clone or download the repository.
 - With pycharm file > open > where/ever/you/downloaded/seProject
 - Create virtualenv
 - Install requirements.txt
 - Tools > Run manage.py Task...
-    $ runserver
+    ```
+    manage.py@seProject > makemigrations accounts resumes
+    manage.py@seProject > migrate
+    manage.py@seProject > runserver
+    ```
+
+## Command Line Setup (Unix)
+```
+$ git clone https://github.com/yebra06/seProject.git
+$ cd seProject
+$ virtualenv -p python3 venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+$ ./manage.py makemigrations accounts resumes
+$ ./manage.py migrate
+$ ./manage.py runserver
+```
 
 ## Testing
-$ python manage.py test
+Using pytest
+```
+$ ./manage.py test
+```
 
 ## Developers
 - Michael Christenson
 - Henderson Cooper
-- Kristopher Curiel
 - Alfredo Yebra Jr.
 
 ## Tools
-- Django Web Framework fsdfsd
 - PyCharm
 
 ## Notes
