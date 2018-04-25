@@ -10,6 +10,22 @@
 		text-align: center;
 		font-size: 15px;
 	}
+    .experience {
+        text-align: justify;
+        font-size: 20px;
+    }
+    .skills {
+        text-align: justify;
+        font-size: 20px;
+    }
+    .awards {
+        text-align: justify;
+        font-size: 20px;
+    }
+    .education {
+        text-align: justify;
+        font-size: 20px;
+    }
 	</style>
 
 	<!-- resume header -->
@@ -22,16 +38,33 @@
 
 	<!-- education -->
 	<div class="education">
-
+        <hr><h2>Education</h2>
+        {% for item in education %}
+            <li><b>{{ item.graduation_year }}:</b> {{ item.degree }} at {{ item.school }} </li>
+        {% endfor %}
 	</div>
 
 	<!-- experience -->
 	<div class="experience">
-
+        <hr><h2>Experience</h2>
+        {% for item in experience %}
+            <li><b>{{ item.start_year }} - {{ item.end_year }}:</b> {{ item.title }} for {{ item.company }}</li>
+        {% endfor %}
 	</div>
 
 	<!-- awards -->
 	<div class="awards">
-
+        <hr><h2>Awards</h2>
+        {% for item in awards %}
+            <li><b>{{ item.year }}:</b> {{ item.award }}</li>
+        {% endfor %}
 	</div>
+
+    <div class="skills">
+        <hr><h2>Skills</h2>
+        {% for item in skills %}
+            <li>{{ item.skill }}</li>
+        {% endfor %}
+    </div>
+    <hr>
 {% endblock %}
