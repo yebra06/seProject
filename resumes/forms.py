@@ -4,26 +4,23 @@ from .choices import MONTHS, YEARS
 from .models import Awards, Education, Experience, Resume, Skills
 
 
-class EducationForm(forms.ModelForm):
-
-    class Meta:
-        model = Education
-        fields = '__all__'
-        exclude = ('resume',)
+class CustomResumeFormset(forms.BaseInlineFormSet):
 
     def clean(self):
         super().clean()
-        school = self.cleaned_data['school']
-        degree = self.cleaned_data['degree']
-        if school == '' and degree != '':
-            raise forms.ValidationError('Please fill out degree.')
-        return self.cleaned_data
+        for form in self.forms:
+            school = form.cleaned_data['school'].title()
+            degree = form.cleaned_data['degree'].title()
+            form.cleaned_data['school'] = school
+            form.cleaned_data['degree'] = degree
+            form.instance.school = school
+            form.instance.degree = degree
 
 
 EducationFormset = forms.inlineformset_factory(
     Resume,
     Education,
-    form=EducationForm,
+    formset=CustomResumeFormset,
     exclude=('resume',),
     extra=0,
     min_num=1,
