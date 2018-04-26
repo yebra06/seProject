@@ -9,12 +9,32 @@ class CustomResumeFormset(forms.BaseInlineFormSet):
     def clean(self):
         super().clean()
         for form in self.forms:
-            school = form.cleaned_data['school'].title()
-            degree = form.cleaned_data['degree'].title()
-            form.cleaned_data['school'] = school
-            form.cleaned_data['degree'] = degree
-            form.instance.school = school
-            form.instance.degree = degree
+            try:
+                school = form.cleaned_data['school'].title()
+                degree = form.cleaned_data['degree'].title()
+                form.cleaned_data['school'] = school
+                form.cleaned_data['degree'] = degree
+                form.instance.school = school
+                form.instance.degree = degree
+            except KeyError:
+                pass
+
+            try:
+                company = form.cleaned_data['company'].title()
+                title = form.cleaned_data['title'].capitalize()
+                form.cleaned_data['company'] = company
+                form.cleaned_data['title'] = title
+                form.instance.company = company
+                form.instance.title = title
+            except KeyError:
+                pass
+
+            try:
+                award = form.cleaned_data['award'].title()
+                form.cleaned_data['award'] = award
+                form.instance.award = award
+            except KeyError:
+                pass
 
 
 EducationFormset = forms.inlineformset_factory(
@@ -35,6 +55,7 @@ EducationFormset = forms.inlineformset_factory(
 ExperienceFormset = forms.inlineformset_factory(
     Resume,
     Experience,
+    formset=CustomResumeFormset,
     exclude=('resume',),
     extra=0,
     min_num=1,
@@ -64,6 +85,7 @@ SkillsFormset = forms.inlineformset_factory(
 AwardsFormset = forms.inlineformset_factory(
     Resume,
     Awards,
+    formset=CustomResumeFormset,
     exclude=('resume',),
     extra=0,
     min_num=1,
