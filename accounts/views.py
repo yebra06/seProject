@@ -41,16 +41,15 @@ def user_signup(request):
             user.save()
             account = authenticate(username=user.username, password=password)
             login(request, account)
-            return redirect('user-profile')
+            return redirect('user-info')
     return render(request, 'user-signup.html', {'form': form})
 
 
 @login_required
 def user_profile(request):
-    resume = Resume.objects.get(user=request.user) if Resume.objects.filter(user=request.user).exists() else None
     return render(request, 'user-profile.html', {
-        'fullname': request.user.get_full_name() or 'User',
-        'resume': resume
+        'user': request.user,
+        'resume': Resume.objects.get(user=request.user) if Resume.objects.filter(user=request.user).exists() else None
     })
 
 
